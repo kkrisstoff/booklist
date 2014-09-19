@@ -1,0 +1,385 @@
+.wrapper{
+    width: 360px;
+    position: relative;
+    margin: 20px auto;
+}
+.pop-up-dropdown {
+    border: 1px solid #d3dadd;
+    border-radius: 3px;
+    padding: 10px;
+    background: #f9f9f9;
+    box-shadow: 0 1px 30px 0 rgba(0, 0, 0, 0.5);
+}
+
+.input-range {
+    background-image: url('../images/ico-range-picker.png') !important;
+    background-position: right 4px center !important;
+    background-repeat: no-repeat !important;
+}
+.range-picker {
+    padding-top: 14px;
+}
+
+
+/* Functional styling;
+ * These styles are required for noUiSlider to function.
+ * You don't need to change these rules to apply your design.
+ */
+.noUi-target,
+.noUi-target * {
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -ms-touch-action: none;
+    -ms-user-select: none;
+    -moz-user-select: none;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+}
+.noUi-base {
+    width: 100%;
+    height: 100%;
+    position: relative;
+}
+.noUi-origin {
+    position: absolute;
+    right: 0;
+    top: 0;
+    left: 0;
+    bottom: 0;
+}
+.noUi-handle {
+    position: relative;
+    z-index: 1;
+}
+.noUi-stacking .noUi-handle {
+    /* This class is applied to the lower origin when
+       its values is > 50%. */
+    z-index: 10;
+}
+.noUi-stacking + .noUi-origin {
+    /* Fix stacking order in IE7, which incorrectly
+       creates a new context for the origins. */
+    *z-index: -1;
+}
+.noUi-state-tap .noUi-origin {
+    -webkit-transition: left 0.3s, top 0.3s;
+    transition: left 0.3s, top 0.3s;
+}
+.noUi-state-drag * {
+    cursor: inherit !important;
+}
+/*----------------------------------------------------------------------*/
+
+
+
+/* Slider size and handle placement */
+.noUi-horizontal {
+    height: 18px;
+}
+.noUi-horizontal .noUi-handle {
+    height: 32px;
+    width: 32px;
+    left: -16px;
+    bottom: -16px;
+}
+.noUi-horizontal.noUi-extended {
+    padding: 0 15px;
+}
+.noUi-horizontal.noUi-extended .noUi-origin  {
+    right: -15px;
+}
+.noUi-vertical {
+    height: 16px;
+}
+.noUi-vertical .noUi-handle {
+    width: 28px;
+    height: 34px;
+    left: -6px;
+    top: -17px;
+}
+.noUi-vertical.noUi-extended {
+    padding: 15px 0;
+}
+.noUi-vertical.noUi-extended .noUi-origin  {
+    bottom: -15px;
+}
+/*----------------------------------------------------------------------*/
+
+
+
+/* Styling*/
+.noUi-background {
+    background: #f4f2f2;
+}
+.noUi-connect {
+    background: #556e90;
+}
+.noUi-origin {
+    border-radius: 2px;
+}
+.noUi-target {
+    background: #f4f2f2;
+    margin: 25px 15px 20px;
+    border: 1px solid #c7c7c7;
+    border-radius: 3px;
+    height: 16px;
+    box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    position: relative;
+}
+.noUi-target.noUi-connect {
+    box-shadow: inset 0 0 3px rgba(51,51,51,0.45), 0 3px 6px -5px #BBB;
+}
+/*----------------------------------------------------------------------*/
+
+
+
+/* Handles and cursors*/
+.noUi-dragable {
+    cursor: w-resize;
+}
+.noUi-vertical .noUi-dragable {
+    cursor: n-resize;
+}
+.noUi-handle {
+    border-radius: 50%;
+    box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    border: 1px solid #d3dadd;
+    top: 50%;
+    margin-top: -16px;
+    position: absolute;
+    background: #ffffff;
+    background: linear-gradient(to bottom,  #ffffff 0%,#d3dadd 100%);
+}
+.noUi-active {
+    background: linear-gradient(to bottom, #d3dadd 0%, #ffffff 100%);
+}
+/*----------------------------------------------------------------------*/
+
+
+
+/* Handle stripes */
+.noUi-handle:after {
+    left: 17px;
+}
+.noUi-vertical .noUi-handle:before,
+.noUi-vertical .noUi-handle:after {
+    width: 14px;
+    height: 1px;
+    left: 6px;
+    top: 14px;
+}
+.noUi-vertical .noUi-handle:after {
+    top: 17px;
+}
+/*----------------------------------------------------------------------*/
+
+
+
+/* Disabled state */
+[disabled].noUi-connect,
+[disabled] .noUi-connect {
+    background: #B8B8B8;
+}
+[disabled] .noUi-handle {
+    cursor: not-allowed;
+}
+/*----------------------------------------------------------------------*/
+
+
+
+/* Pick range min and max */
+input[type=number]::-webkit-inner-spin-button,
+input[type=number]::-webkit-outer-spin-button {-webkit-appearance: none;
+    margin:0;}
+
+.pick-range-min,
+.pick-range-max{
+    position: absolute;
+    top: 0;
+    width: 88px;
+    height: 38px;
+    border: 1px solid #c7c7c7;
+    box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    line-height: 38px;
+    text-align: center;
+    border-radius: 3px;
+    background: #fdfdfd;
+    color: #333333;
+    -webkit-box-shadow: inset 0px 1px 4px 0px rgba(0, 0, 0, 0.27);
+    -moz-box-shadow:    inset 0px 1px 4px 0px rgba(0, 0, 0, 0.27);
+    box-shadow:         inset 0px 1px 4px 0px rgba(0, 0, 0, 0.27);
+    font-size: 14px;
+}
+.pick-range-min{
+    left: 0;
+}
+.pick-range-max{
+    right: 0;
+
+}
+/*----------------------------------------------------------------------*/
+
+
+/*popups*/
+.dialog-frame{
+    display: inline-block;
+    position: relative;
+}
+.dialog-holder {
+    display: inline-block;
+    background: #982771;
+    background: -moz-linear-gradient(top,  #982771 0%, #7b1e5b 100%);
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#982771), color-stop(100%,#7b1e5b));
+    background: -webkit-linear-gradient(top,  #982771 0%,#7b1e5b 100%);
+    background: -o-linear-gradient(top,  #982771 0%,#7b1e5b 100%);
+    background: -ms-linear-gradient(top,  #982771 0%,#7b1e5b 100%);
+    background: linear-gradient(to bottom,  #982771 0%,#7b1e5b 100%);
+    border-radius: 3px;
+    padding: 42px 7px 7px;
+    position: relative;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+}
+.dialog__title{
+    color: #fff;
+    min-height: 35px;
+    padding: 0 40px;
+    margin: -35px 0 0 0;
+    text-transform: uppercase;
+    text-align: center;
+    font-size: 24px;
+    line-height: 30px;
+    text-shadow: 0 -1px 0 rgba(0, 0, 0, 1);
+}
+.dialog__content{
+    min-width: 430px;
+    min-height: 50px;
+    background: #f9f9f9;
+    border-radius: 3px;
+    padding: 20px 7px;
+    border: 1px solid #5f0d43;
+    overflow: auto;
+
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+}
+.dialog__content p {
+    margin: 0 0 20px;
+}
+.dialog__buttons .fluid-columns {
+    margin: 0 -4px;
+}
+.dialog__buttons .fluid-columns__col {
+    padding: 0 4px;
+    margin: 0;
+}
+.btn-close-dialog {
+    position: absolute;
+    top: 6px;
+    right: 8px;
+
+    width: 32px;
+    height: 32px;
+    background:url('../images/spritesheet.png') no-repeat -47px -5px;
+}
+.btn-close-dialog:hover {
+    background-position: -5px -5px;
+}
+.btn-close-dialog:active {
+    background-position: -5px -47px;
+}
+
+
+/*
+* Pop-up-dropdown
+*/
+.pop-up-dropdown-wrapper{
+    position: absolute;
+    z-index: 1200;
+}
+.pop-up-dropdown {
+    float: left;
+    border: 1px solid #d3dadd;
+    border-radius: 3px;
+    padding: 10px;
+    position: relative;
+    background: #f9f9f9;
+    box-shadow: 0 1px 30px 0 rgba(0, 0, 0, 0.5);
+}
+
+.pop-up-dropdown__content{
+    min-width: 340px;
+    position: relative;
+}
+.pop-up-dropdown__title{
+    margin: 0;
+    width: 100%;
+    height: 38px;
+    padding: 0 88px;
+    font-size: 14px;
+    line-height: 38px;
+    text-align: center;
+    color: #2c4261;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+    text-transform: uppercase;
+}
+.pop-up-dropdown__button-holder{
+    margin: 0 -10px -10px;
+    padding: 10px;
+    border-top: 1px solid #d3dadd;
+    -webkit-box-shadow: inset 0px 1px 0px 0px rgba(255, 255, 255, 1);
+    -moz-box-shadow:    inset 0px 1px 0px 0px rgba(255, 255, 255, 1);
+    box-shadow:         inset 0px 1px 0px 0px rgba(255, 255, 255, 1);
+    overflow: hidden;
+}
+.pop-up-dropdown__button-holder button{
+    float: left;
+    width: 48%;
+}
+.pop-up-dropdown__button-holder .button--blue{
+    float: right;
+    width: 48%;
+}
+.pop-up-dropdown__arrow--top,
+.pop-up-dropdown__arrow--bottom{
+    position: absolute;
+    right:10px;
+    border-top: 9px solid transparent;
+    border-bottom: 9px solid transparent;
+    border-left: 6px solid transparent;
+    border-right: 6px solid transparent;
+    content:'';
+}
+.pop-up-dropdown__arrow--bottom{
+    border-top-color: #f9f9f9;
+    bottom: -17px;
+    display: none;
+}
+.to-top .pop-up-dropdown__arrow--top {
+    display: none;
+}
+.to-top .pop-up-dropdown__arrow--bottom {
+    display: block;
+}
+.pop-up-dropdown__arrow--top{
+    border-bottom-color: #f9f9f9;
+    top: -17px;
+}
+
+
+.dialog-frame-add {
+    width: 60%;
+}
+
+.dialog-frame-add-phone {
+    width: 45%;
+}
+
+.dialog-holder-add {
+    width: 100%;
+}
