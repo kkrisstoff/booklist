@@ -1,0 +1,16 @@
+<header class="container">
+    <section class="jumbotron header">
+        <div class="row">
+            <div class="col-xs-2">
+                <h2>Your Personal List</h2>
+            </div>
+            <div class="col-xs-9 col-xs-offset-1">
+                <% if (locals.title) { %>
+                <h3><%= title %></h3>
+                <% } else { %>
+                <h3>No Title</h3>
+                <% } %>
+            </div>
+        </div>
+    </section>
+</header>

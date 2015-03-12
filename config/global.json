@@ -1,0 +1,14 @@
+{
+    "applications": {
+        "ReadList": {
+            "applicationId": "yCCMB1KnjjbAY7WeORqyN2F7Lb8thMvTxKWEXpHe", 
+            "masterKey": "bLlCvA1koRhbmBfdwkAIF2PFUEnrtaVrQ2JAf2y6"
+        }, 
+        "_default": {
+            "link": "ReadList"
+        }
+    }, 
+    "global": {
+        "parseVersion": "1.3.5"
+    }
+}

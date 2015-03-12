@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Log In</title>
+    <% include partials/templates/head.ejs %>
+</head>
+<body>
+<section class="container">
+    <div class="row jumbotron">
+        <h2>Log In</h2>
+        <form id="login" action="/login" method="post" class="col-xs-4">
+            <div class="form-group">
+                <label for="username">Username</label>
+                <input id="username" class="form-control" type="text" value="" name="username" placeholder="Your Name"/>
+            </div>
+            <div class="form-group">
+                <label for="password">Password</label>
+                <input id="password" class="form-control" type="password" value="" name="password" placeholder="Password"/>
+            </div>
+            <div class="form-group">
+                <button type="submit" class="btn btn-default">Log In</button>
+                <a href="/signup" class="btn btn-default">Sign Up</a>
+            </div>
+        </form>
+    </div>
+</section>
+</body>
+</html>

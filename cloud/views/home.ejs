@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Home</title>
+    <% include partials/templates/head.ejs %>
+</head>
+<body>
+<% include partials/templates/header.ejs %>
+<% include partials/templates/nav.ejs %>
+<section class="container">
+
+    <div class="row">
+        <ul>
+            <% if (!Parse.User.current()) { %>
+            <li>
+                <a href="/login">Login</a>
+                <b> | </b>
+                <a href="/signup">Signup</a>
+            </li>
+            <% } else { %>
+            <li>
+                <a href="#"><%= Parse.User.current().get('username') %></a>
+                <b> | </b>
+                <a href="/logout" data-action="post">Logout</a>
+            </li>
+            <% } %>
+        </ul>
+    </div>
+
+    <div class="row">
+        <p>My Books</p>
+        <p>__________________</p>
+    </div>
+    <div class="row">
+        <div class="col-xs-6">
+            <ul id="booksList" class="list-group books-list">
+                <li class="list-group-item">test1</li>
+                <li class="list-group-item">test2</li>
+            </ul>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-xs-6">
+            <button id="showBooks" class="btn btn-default">Show My Books</button>
+        </div>
+    </div>
+
+</section>
+<% include partials/templates/footer.ejs %>
+
+<script type="text/javascript">
+    var showBtn = document.getElementById("showBooks"),
+        listOfBooks = document.getElementById("booksList");
+
+    function createListItem (text) {
+        var li = document.createElement("li"),
+            content = document.createTextNode(text);
+        li.appendChild(content);
+        li.className = 'list-group-item';
+
+        return li;
+    }
+
+    showBtn.addEventListener("click", function () {
+        var i;
+        Parse.Cloud.run('showMyBooks', {books: 'all'}, {
+            success: function(resp) {
+                console.log(resp);
+                listOfBooks.innerHTML = '';
+                for (i = 0; resp[i]; i++){
+                    listOfBooks.appendChild(createListItem(resp[i]));
+                }
+            },
+            error: function(error) {
+                console.log(error);
+            }
+        });
+    });
+</script>
+
+</body>
+</html>

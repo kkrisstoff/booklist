@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Home</title>
+    <% include partials/templates/head.ejs %>
+</head>
+<body>
+<% include partials/templates/header.ejs %>
+<section class="container">
+
+    <div class="row">
+        <p>Test Index Page</p>
+        <ul class="col-xs-8 col-xs-pull-2">
+            <li>Book1</li>
+            <li>Book2</li>
+            <li>Book3</li>
+        </ul>
+    </div>
+    <div class="row">
+        <p>__________________</p>
+        <form action="/postTest" method="post">
+            <input type="_method" value="delete"/>
+            <button type="submit" class="btn btn-default">Submit</button>
+        </form>
+    </div>
+    <button id="clickable" class="btn btn-default">Submit</button>
+</section>
+<script type="text/javascript">
+    var btn = document.getElementById("clickable");
+    btn.addEventListener("click", function () {
+
+    });
+</script>
+<% include partials/templates/footer.ejs %>
+</body>
+</html>
