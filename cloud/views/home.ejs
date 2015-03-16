@@ -7,50 +7,36 @@
 <body>
 <% include partials/templates/header.ejs %>
 <% include partials/templates/nav.ejs %>
+
 <section class="container">
-
     <div class="row">
-        <ul>
-            <% if (!Parse.User.current()) { %>
-            <li>
-                <a href="/login">Login</a>
-                <b> | </b>
-                <a href="/signup">Signup</a>
-            </li>
-            <% } else { %>
-            <li>
-                <a href="#"><%= Parse.User.current().get('username') %></a>
-                <b> | </b>
-                <a href="/logout" data-action="post">Logout</a>
-            </li>
-            <% } %>
-        </ul>
+        <div class="col-xs-6">
+            <h3><span class="label label-default">All Books</span></h3>
+        </div>
     </div>
-
     <div class="row">
-        <p>My Books</p>
-        <p>__________________</p>
+        <div class="col-xs-6">
+            <div class="btn-group" role="group" id="showBooks">
+                <button type="button" class="btn btn-default" data-type="my" data-user="<%= Parse.User.current().get('username') %>">Show My Books</button>
+                <button type="button" class="btn btn-default" data-type="all">Show All Books</button>
+                <button type="button" class="btn btn-default" data-type="clear">Clear List</button>
+            </div>
+        </div>
     </div>
     <div class="row">
         <div class="col-xs-6">
             <ul id="booksList" class="list-group books-list">
-                <li class="list-group-item">test1</li>
-                <li class="list-group-item">test2</li>
+
             </ul>
         </div>
     </div>
-    <div class="row">
-        <div class="col-xs-6">
-            <button id="showBooks" class="btn btn-default">Show My Books</button>
-        </div>
-    </div>
-
 </section>
+
 <% include partials/templates/footer.ejs %>
 
 <script type="text/javascript">
-    var showBtn = document.getElementById("showBooks"),
-        listOfBooks = document.getElementById("booksList");
+    var $showBtns = $("#showBooks button"),
+        $listOfBooks = $("#booksList");
 
     function createListItem (text) {
         var li = document.createElement("li"),
@@ -61,14 +47,26 @@
         return li;
     }
 
-    showBtn.addEventListener("click", function () {
-        var i;
-        Parse.Cloud.run('showMyBooks', {books: 'all'}, {
+    $showBtns.on("click", function (e) {
+        var target = e.currentTarget,
+            type = target.dataset.type,
+            user = target.dataset.user || null,
+            i;
+
+        if (type == "clear"){
+            $listOfBooks.empty();
+            return false;
+        }
+
+        Parse.Cloud.run('showMyBooks', {
+                books: type,
+                user: user
+            }, {
             success: function(resp) {
                 console.log(resp);
-                listOfBooks.innerHTML = '';
+                $listOfBooks.empty();
                 for (i = 0; resp[i]; i++){
-                    listOfBooks.appendChild(createListItem(resp[i]));
+                    $listOfBooks.append(createListItem(resp[i]));
                 }
             },
             error: function(error) {

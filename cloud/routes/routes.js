@@ -1,3 +1,5 @@
+var requireUser = require('cloud/require-user');
+
 module.exports = function(){
     var express = require('express');
     var router = express();
@@ -17,7 +19,7 @@ module.exports = function(){
     });
 
     /* GET home page. */
-    router.get("/home",  function(req, res) {
+    router.get("/home", requireUser, function(req, res) {
 
         res.render('home', {
             title: 'Home',

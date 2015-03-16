@@ -1,6 +1,4 @@
 var requireUser = require('cloud/require-user');
-console.log("##requreUser");
-console.log(requireUser);
 
 module.exports = function() {
     var express = require('express');
@@ -93,24 +91,27 @@ module.exports = function() {
     });
 
     app.get('/list/details', requireUser, function(req, res) {
-
+        res.render('/details', {
+            page: 'details',
+            title: "Details"
+        });
         // Build the query to find an image by id
 
-        var query = new Parse.Query('List');
-        query.equalTo("objectId", id);
-
-        query.find().then(
-            function(objects) {
-                if (objects.length === 0) {
-                    res.send("Image not found");
-                } else {
-                   console.log(objects);
-                }
-            },
-            function(error) {
-                res.send("Image not found");
-            }
-        );
+//        var query = new Parse.Query('List');
+//        query.equalTo("objectId", id);
+//
+//        query.find().then(
+//            function(objects) {
+//                if (objects.length === 0) {
+//                    res.send("Image not found");
+//                } else {
+//                   console.log(objects);
+//                }
+//            },
+//            function(error) {
+//                res.send("Image not found");
+//            }
+//        );
     });
 
     return app;
