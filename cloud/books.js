@@ -18,14 +18,17 @@ module.exports = function() {
 
     //Save New Book
     app.post('/saveNewBook', function(req, res) {
-        console.log("##Book Title");
-        console.log(req.body.title);
-
-        var currentUser = Parse.User.current().get('username') || "unknown user";
+        var currentUser = Parse.User.current().get('username') || "unknown user",
+            title = req.body.title,
+            author = req.body.author || "",
+            description = req.body.description || "",
+            img;
 
         if (req.body.title) {
             var book = new Book();
             book.set("title", req.body.title);
+            book.set("author", req.body.author);
+            book.set("description", req.body.description);
             book.set("user", currentUser);
 
             // Set up the ACL so everyone can read
@@ -61,6 +64,8 @@ module.exports = function() {
                 data.each(function(item) {
                     books.push(item);
                 });
+                console.log("#list");
+                console.log(books);
                 res.render('list', {
                     title: 'Book List',
                     page: 'list',
@@ -72,6 +77,7 @@ module.exports = function() {
                 // The collection could not be retrieved.
             }
         });
+
     });
 
     //Filter Books

@@ -2,6 +2,12 @@ require('cloud/app.js');
 
 //Cloud Functions
 Parse.Cloud.define("showMyBooks", function(request, response) {
+//    var list = require('cloud/modules/book-list'),
+//        titles = list.findList({
+//            user: request.params.user,
+//            type: request.params.books
+//        });
+//    response.success(titles);
     var query = new Parse.Query("Book"),
         currentUser = request.params.user;
     if (request.params.books == "my" && currentUser){
