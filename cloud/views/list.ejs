@@ -80,19 +80,15 @@
                     <form action="/saveNewBook" method="post">
                         <div class="form-group">
                             <p>New Book Title</p>
-
                         </div>
                         <div class="form-group">
                             <p>New Book Author</p>
-
                         </div>
                         <div class="form-group">
                             <p>New Book Description</p>
-
                         </div>
                         <div class="form-group">
                             <p>New Book Cover</p>
-
                         </div>
                     </form>
                 </div>
@@ -107,16 +103,20 @@
 
 <% include partials/templates/footer.ejs %>
 
+<script type="text/javascript" src="/js/views/add-book.js"></script>
 <script type="text/javascript">
-    new AddNewItem({
-        el: "#addNewBookModal"
-    });
+    (function () {
 
-    var showDetailsBtn = $("#booksList a");
-    showDetailsBtn.on("click", function () {
-        $('#bookModal').modal();
-    });
+        var addNewItem = new app.AddNewItem({
+            el: "#addNewBookModal"
+        });
 
+        var showDetailsBtn = $("#booksList a");
+        showDetailsBtn.on("click", function () {
+            $('#bookModal').modal();
+        });
+
+    })()
 </script>
 
 </body>

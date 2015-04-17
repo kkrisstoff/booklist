@@ -1,22 +1,7 @@
-module.exports = function(){
-    var express = require('express');
-    var app = express();
-
-    //Render the login page
-    app.get('/login', function(req, res) {
-        var currentUser = Parse.User.current();
-        if (currentUser) {
-            res.redirect('/home');
-        } else {
-            res.render('login', {
-                title: 'Log In',
-                page: 'login'
-            });
-        }
-    });
+module.exports = function(user){
 
     // Logs in the user
-    app.post('/login', function(req, res) {
+    user.post('/login', function(req, res) {
         var name = req.body.username,
             pass = req.body.password;
         Parse.User.logIn(name, pass, {
@@ -34,16 +19,8 @@ module.exports = function(){
         });
     });
 
-    //Render the signup page
-    app.get('/signup', function(req, res) {
-        res.render('signup', {
-            title: 'Log In',
-            page: 'signup',
-            message: ""
-        });
-    });
     //Sign up a new user
-    app.post('/signup', function(req, res) {
+    user.post('/signup', function(req, res) {
         var username = req.body.username;
         var password = req.body.password;
 
@@ -65,19 +42,16 @@ module.exports = function(){
     });
 
     // Logs out the user
-    app.get('/logout', function(req, res) {
+    user.get('/logout', function(req, res) {
         Parse.User.logOut();
         res.redirect('/');
     });
 
-
     // TEST method
-    app.delete('/postTest', function(req, res) {
+    user.delete('/postTest', function(req, res) {
         Parse.User.logOut();
         console.log("##delete");
         res.redirect('/');
     });
 
-
-    return app;
-}();
+};

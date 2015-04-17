@@ -15,6 +15,7 @@ app.set('view engine', 'ejs');    //Set the template engine
 app.use(parseExpressHttpsRedirect());   // Automatically redirect non-secure urls to secure ones
 app.use(express.bodyParser());          //reading request body
 app.use(express.methodOverride());      //todo: why isn't works?
+
 //cookie
 app.use(express.cookieParser('SECRET_SIGNING_KEY'));
 app.use(parseExpressCookieSession({
@@ -27,13 +28,9 @@ app.use(parseExpressCookieSession({
 
 //Rotes
 app.use(require('cloud/routes/routes'));
+//API
+app.use(require('cloud/api/api'));
 
-//User
-var user = require('cloud/user');
-
-//todo: do use this way if it needs
-app.use('/', user);
-app.use('/', require('cloud/books'));
 
 // Attach the Express app to Cloud Code.
 app.listen();
