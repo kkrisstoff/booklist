@@ -6,7 +6,7 @@ module.exports = function(user){
             pass = req.body.password;
         Parse.User.logIn(name, pass, {
             success: function(user) {
-                app.locals.user = user.username;
+                //app.locals.user = user.username;
                 res.redirect('/home');
             },
             error: function(user, error) {

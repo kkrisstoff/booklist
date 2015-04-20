@@ -1,15 +1,15 @@
+/**
+ * book API
+ *
+ *
+ * @type {*}
+ */
+
 var requireUser = require('cloud/require-user');
 
 var Book = Parse.Object.extend("Book", {
-    className: "Book",
-    title: function() {
-        var title = this.get('title') || "Untitled";
-        return title;
-    }
-});
+    className: "Book"
 
-var List = Parse.Collection.extend({
-    model: Book
 });
 
 module.exports = function(book) {
@@ -49,22 +49,6 @@ module.exports = function(book) {
                 res.json({ error: error });
             }
         );
-    });
-
-    //Filter Books
-    book.post('/myBooks', function (req, res) {
-        var query = new Parse.Query(Image);
-
-        query.descending("createdAt");
-        query.equalTo("user", Parse.User.current());
-
-        query.find().then(function(objects) {
-            res.render('/list', {
-                images: objects,
-                page: 'list',
-                title: "My Images"
-            });
-        });
     });
 
     book.get('/book/details', requireUser, function(req, res) {

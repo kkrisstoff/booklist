@@ -23,8 +23,8 @@ module.exports = function(list) {
                 data.each(function(item) {
                     books.push(item);
                 });
-                console.log("#list");
-                console.log(books);
+//                console.log("#list");
+//                console.log(books);
                 res.render('list', {
                     title: 'Book List',
                     page: 'list',
@@ -32,7 +32,7 @@ module.exports = function(list) {
                 });
             },
             error: function(collection, error) {
-                console.log("Error: " + error.code + " " + error.message);
+                console.log("Error: " + error.code + ", " + error.message);
                 // The collection could not be retrieved.
             }
         });
@@ -41,16 +41,15 @@ module.exports = function(list) {
 
     //Filter Books
     list.post('/myBooks', function (req, res) {
-        var query = new Parse.Query(Image);
+        var query = new Parse.Query(Book);
 
-        query.descending("createdAt");
         query.equalTo("user", Parse.User.current());
 
-        query.find().then(function(objects) {
+        query.find().then(function(books) {
             res.render('/list', {
-                images: objects,
+                title: 'Book List',
                 page: 'list',
-                title: "My Images"
+                books: books
             });
         });
     });
